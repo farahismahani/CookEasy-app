@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:cookeasy/services/progress_tracker.dart';
-
 
 class ScrambleStep1 extends StatelessWidget {
- // final ProgressTrackerService _progressService = ProgressTrackerService();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +24,18 @@ class ScrambleStep1 extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: () async {
-                 // await _progressService.logStepCompletion('scrambled_egg', 1);
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,       // ✅ white button
+                  foregroundColor: Colors.black,       // ✅ black text
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 14),
+                ),
+                onPressed: () {
                   Navigator.pushNamed(context, '/scramble_step2');
-                },                child: Text('Next'),
+                },
+                child: Text('Next'),
               ),
             ),
           ],

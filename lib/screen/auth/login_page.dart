@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -8,8 +10,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool rememberMe = false;
   bool isPasswordHidden = true;
+  bool isLoading = false;
 
-  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
@@ -23,15 +26,12 @@ class _LoginPageState extends State<LoginPage> {
           children: [
             Image.asset('assets/images/auth-chef-hat.png', height: 100),
             SizedBox(height: 20),
-            Text(
-              'Login',
-              style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
-            ),
+            Text('Login', style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
             SizedBox(height: 30),
             _buildTextField(
-              icon: 'assets/images/icons8-username-24.png',
-              hint: 'Username',
-              controller: usernameController,
+              icon: 'assets/images/icons8-email-30.png',
+              hint: 'Email',
+              controller: emailController,
             ),
             SizedBox(height: 16),
             _buildTextField(
@@ -40,11 +40,7 @@ class _LoginPageState extends State<LoginPage> {
               controller: passwordController,
               obscureText: isPasswordHidden,
               isPassword: true,
-              togglePassword: () {
-                setState(() {
-                  isPasswordHidden = !isPasswordHidden;
-                });
-              },
+              togglePassword: () => setState(() => isPasswordHidden = !isPasswordHidden),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,36 +49,79 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     Checkbox(
                       value: rememberMe,
-                      onChanged: (val) {
-                        setState(() => rememberMe = val ?? false);
-                      },
+                      onChanged: (val) => setState(() => rememberMe = val ?? false),
                     ),
                     Text('Remember Me'),
                   ],
                 ),
-                TextButton(
-                  onPressed: () {},
-                  child: Text('Forgotten Password?'),
-                ),
+                TextButton(onPressed: () {}, child: Text('Forgot Password?')),
               ],
             ),
             SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacementNamed(context, '/dashboard');
+            isLoading
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+              onPressed: () async {
+                final email = emailController.text.trim();
+                final password = passwordController.text.trim();
+
+                if (email.isEmpty || password.isEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Email and password are required.')),
+                  );
+                  return;
+                }
+
+                setState(() => isLoading = true);
+                try {
+                  UserCredential userCredential =
+                  await FirebaseAuth.instance.signInWithEmailAndPassword(
+                    email: email,
+                    password: password,
+                  );
+
+                  DocumentSnapshot userDoc = await FirebaseFirestore.instance
+                      .collection('users')
+                      .doc(userCredential.user!.uid)
+                      .get();
+
+                  if (userDoc.exists) {
+                    Map<String, dynamic> userData =
+                    userDoc.data() as Map<String, dynamic>;
+
+                    print('Email: ${userData['email']}');
+                    print('Username: ${userData['username']}');
+                  }
+
+                  Navigator.pushReplacementNamed(context, '/dashboard');
+                } on FirebaseAuthException catch (e) {
+                  String message;
+                  if (e.code == 'user-not-found') {
+                    message = 'No user found for that email.';
+                  } else if (e.code == 'wrong-password') {
+                    message = 'Incorrect password.';
+                  } else {
+                    message = 'Login failed: ${e.message}';
+                  }
+
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(message)));
+                } catch (e) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Login failed: ${e.toString()}')),
+                  );
+                } finally {
+                  setState(() => isLoading = false);
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Color(0xFFBCE7D6),
                 padding: EdgeInsets.all(14),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
               ),
               child: Icon(Icons.arrow_forward),
             ),
             TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/signup');
-              },
+              onPressed: () => Navigator.pushNamed(context, '/signup'),
               child: Text('Register'),
             ),
           ],
@@ -114,8 +153,7 @@ class _LoginPageState extends State<LoginPage> {
           ),
           suffixIcon: isPassword
               ? IconButton(
-            icon: Icon(
-                obscureText ? Icons.visibility_off : Icons.visibility),
+            icon: Icon(obscureText ? Icons.visibility_off : Icons.visibility),
             onPressed: togglePassword,
           )
               : null,

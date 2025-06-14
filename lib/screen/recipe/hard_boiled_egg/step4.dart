@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:cookeasy/services/progress_tracker.dart';
 
 class BoiledStep4 extends StatelessWidget {
-//  final ProgressTrackerService _progressService = ProgressTrackerService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +25,14 @@ class BoiledStep4 extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 14),
+                    ),
                     onPressed: () {
                       Navigator.pushNamed(context, '/boiled_step3');
                     },
@@ -37,8 +42,15 @@ class BoiledStep4 extends StatelessWidget {
                 SizedBox(width: 16),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () async {
-                     // await _progressService.logStepCompletion('hard_boiled_egg', 4);
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.symmetric(vertical: 14),
+                    ),
+                    onPressed: () {
                       Navigator.pushNamed(context, '/boiled_step5');
                     },
                     child: Text('Next'),

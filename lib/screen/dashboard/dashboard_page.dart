@@ -41,43 +41,39 @@ class DashboardPage extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               SizedBox(height: 24),
+
+              // Recipes Card
               MenuCard(
                 icon: Icons.receipt_long,
                 label: '2 Recipes',
                 onTap: () => Navigator.pushNamed(context, '/recipeSelector'),
               ),
               SizedBox(height: 12),
+
+              // Lesson Plan Card
               MenuCard(
                 icon: Icons.menu_book,
                 label: 'Lesson Plan',
                 onTap: () => Navigator.pushNamed(context, '/lessonPlan'),
               ),
               SizedBox(height: 12),
-              MenuCard(
-                icon: Icons.show_chart,
-                label: 'Track Progress',
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LessonPlanViewer(
-                      title: 'Progress Summary',
-                      filename: 'summary_checklist.pdf',
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 12),
+
+              // Settings
               MenuCard(
                 icon: Icons.settings,
                 label: 'Settings',
                 onTap: () => Navigator.pushNamed(context, '/settings'),
               ),
               Spacer(),
+
+              // Logout visual
               Image.asset(
                 'assets/images/logout.png',
                 height: 120,
               ),
               SizedBox(height: 16),
+
+              // Logout Button
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(

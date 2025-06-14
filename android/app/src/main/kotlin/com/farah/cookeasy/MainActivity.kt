@@ -1,4 +1,4 @@
-package com.example.cookeasy
+package com.farah.cookeasy
 
 import io.flutter.embedding.android.FlutterActivity
 

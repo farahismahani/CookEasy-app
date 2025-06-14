@@ -4,7 +4,6 @@ import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:printing/printing.dart';
 
 class LessonPlanViewer extends StatefulWidget {
   final String title;
@@ -18,7 +17,6 @@ class LessonPlanViewer extends StatefulWidget {
 
 class _LessonPlanViewerState extends State<LessonPlanViewer> {
   String? localPath;
-  Uint8List? pdfBytes;
 
   @override
   void initState() {
@@ -34,23 +32,7 @@ class _LessonPlanViewerState extends State<LessonPlanViewer> {
 
     setState(() {
       localPath = file.path;
-      pdfBytes = bytes.buffer.asUint8List();
     });
-  }
-
-  Future<void> printPdf() async {
-    if (pdfBytes != null) {
-      await Printing.layoutPdf(onLayout: (_) async => pdfBytes!);
-    }
-  }
-
-  Future<void> sharePdf() async {
-    if (pdfBytes != null) {
-      await Printing.sharePdf(
-        bytes: pdfBytes!,
-        filename: widget.filename,
-      );
-    }
   }
 
   @override
@@ -59,22 +41,6 @@ class _LessonPlanViewerState extends State<LessonPlanViewer> {
       appBar: AppBar(
         title: Text(widget.title),
         backgroundColor: Color(0xFFBCE7D6),
-        actions: [
-          PopupMenuButton<String>(
-            icon: Icon(Icons.more_vert),
-            onSelected: (value) {
-              if (value == 'print') {
-                printPdf();
-              } else if (value == 'share') {
-                sharePdf();
-              }
-            },
-            itemBuilder: (context) => [
-              PopupMenuItem(value: 'print', child: Text('Print')),
-              PopupMenuItem(value: 'share', child: Text('Share')),
-            ],
-          ),
-        ],
       ),
       body: localPath == null
           ? Center(child: CircularProgressIndicator())
