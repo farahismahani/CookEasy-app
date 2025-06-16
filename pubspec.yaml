@@ -1,0 +1,48 @@
+name: cookeasy
+description: "her fyp"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  shared_preferences: ^2.2.2
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.17.2
+#  printing: 5.13.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_pdfview: ^1.4.0+1
+  path_provider: ^2.1.5
+  permission_handler: ^11.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/images/pecs/
+    - assets/pdfs/CookEasy_LessonPlan.pdf
+    - assets/pdfs/lesson1_what_is_cooking.pdf
+    - assets/pdfs/lesson2_kitchen_tools.pdf
+    - assets/pdfs/lesson3_food_safety.pdf
+    - assets/pdfs/lesson4_cleaning_up.pdf
+    - assets/pdfs/caregiver_guide.pdf
+    - assets/pdfs/summary_checklist.pdf
+    - assets/pdfs/card_kitchen_tools.pdf
+    - assets/pdfs/card_food_items.pdf
+    - assets/pdfs/card_hygiene_safety.pdf
+    - assets/pdfs/card_sequencing_visual.pdf
+    - assets/pdfs/card_emotions.pdf
+    - assets/pdfs/card_actions.pdf
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
