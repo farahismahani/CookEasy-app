@@ -1,16 +1,26 @@
-# cookeasy
+CookEasy – Visual-Based Cooking App
 
-hey fyp project
+CookEasy is a mobile app designed to help non-verbal learners follow simple cooking routines at home. It uses PECS-style visual cards and step-by-step guidance, with an optional caregiver role for support.
 
-## Getting Started
+This was developed as my Final Year Project (Cognitive Science, UNIMAS), combining accessible UX, behavioral task routines, and mobile tech.
 
-This project is a starting point for a Flutter application.
+🧠 Key Features
+-  Visual task board (To Do → Doing → Done)
+- Learner & caregiver roles (Firebase Auth)
+- Works offline once routines are cached
+- Custom PECS‑style icon set
+- In‑app lesson plans + downloadable PDFs
 
-A few resources to get you started if this is your first Flutter project:
+🛠️ Tech Stack
+- Flutter
+- Firebase (Auth + Firestore)
+- Dart
+- Figma (for design planning)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+🧪 Testing
+Reviewed by experts in ICT and cognitive psychology to assess clarity, usability, and cognitive accessibility of the app’s core routines.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+🔗 Related:
+👉 [CookEasy Website](https://github.com/farahismahani/CookEasy-website)  
+👉 [Final version APK lives in the website repo’s `/assets` folder]
