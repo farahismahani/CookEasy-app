@@ -1,0 +1,67 @@
+name: cookeasy
+description: "her fyp"
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.6
+  shared_preferences: ^2.2.2
+  firebase_core: ^2.27.0
+  firebase_auth: ^4.17.4
+  cloud_firestore: ^4.17.2
+  smooth_page_indicator: ^1.2.1
+
+#  printing: 5.13.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  flutter_pdfview: ^1.4.0+1
+  path_provider: ^2.1.5
+  permission_handler: ^11.0.1
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/pdfs/
+    - assets/pdfs/pecs_kanban_parent_guide.pdf
+    - assets/pdfs/printable_pecs_kit.pdf
+    - assets/images/
+    - assets/images/pecs/
+    - assets/images/lesson_plan_card/caregiver-tips.png
+    - assets/images/lesson_plan_card/watch-out.png
+    - assets/images/lesson_plan_card/caregiver-tips-lesson1.png
+    - assets/images/lesson_plan_card/watch-out-lesson1.png
+    - assets/images/lesson_plan_card/caregiver-tips-lesson2.png
+    - assets/images/lesson_plan_card/watch-out-lesson2.png
+    - assets/images/lesson_plan_card/caregiver-tips-lesson3.png
+    - assets/images/lesson_plan_card/watch-out-lesson3.png
+    - assets/images/lesson_plan_card/caregiver-tips-lesson4.png
+    - assets/images/lesson_plan_card/watch-out-lesson4.png
+    - assets/images/lesson_plan_card/lessoncard/
+    - assets/images/lesson_plan_card/lessoncard/actions/
+    - assets/images/lesson_plan_card/lessoncard/emotions/
+    - assets/images/lesson_plan_card/lessoncard/food_items/
+    - assets/images/lesson_plan_card/lessoncard/hygiene_safety/
+    - assets/images/lesson_plan_card/lessoncard/kitchen_tools/
+    - assets/images/lesson_plan_card/lessoncard/sequencing_visual/
+    - assets/images/icons/caregiver/lightbulb.png
+    - assets/images/icons/caregiver/hands.png
+    - assets/images/icons/caregiver/routine.png
+    - assets/images/icons/caregiver/celebrate.png
+    - assets/images/kanban/frame_todo.png
+    - assets/images/kanban/frame_doing.png
+    - assets/images/kanban/frame_done.png
+    - assets/images/kanban/kanban_board.png
+    - assets/images/pecs_board/
+    - assets/images/quiz/
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
